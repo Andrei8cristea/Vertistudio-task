@@ -1,13 +1,33 @@
 <!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+</head>
 <body>
-    <form>
+    <h1>Sign up</h1>
+    <form id="signup-form" action="/register" method="POST">
         <label for="username">Username:</label>
-        <input type="text" name="username" required placeholder="user">
+        <input type="text" id="username" name="username" required placeholder="user">
 
         
         <label for="password">Password:</label>
-        <input type="text" name="password" required placeholder="passwd">
+        <input type="password" name="password" required placeholder="passwd"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+        title="At least 8 characters, one uppercase, one lowercase and a numerical">
 
         <button type="submit">Submit</button>
     </form>
+
+    <script>
+        const pwd = document.getElementById("password");
+        const form = document.getElementById("signup-form");
+
+        form.addEventListener('submit', e =>{
+            if(pwd.validity.patternMismatch){
+                alert("Your password is not OK!");
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
